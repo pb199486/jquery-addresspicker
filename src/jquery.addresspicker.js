@@ -54,7 +54,7 @@
 
           this.$element.typeahead({
               minLength:3,
-              delay:1000,
+              delay:this.options.typeaheaddelay,
               source: this._geocode.bind(this),
               textproperty: function(item) {
                       return item.formatted_address;
