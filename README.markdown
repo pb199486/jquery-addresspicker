@@ -13,6 +13,8 @@ Try to enter an address like Berlin Kreuzberg, Manhattan Central Park or London 
 
 Addresspicker with Map
 ----------------------
+![Addresspicker with Map](https://github.com/elmariachi111/jquery-addresspicker/blob/master/demos/images/addresspicker.jpg?raw=true)
+
 You can drag and drop the marker to the correct location. The input field address is then updated again according to a reverse Geocoding result. 
 Note that I'm using JQuery events to notify you on address and marker position changes
 
