@@ -51,7 +51,7 @@
           this.geocoder = new google.maps.Geocoder();
 
           var self = this;
-          this.$element.on("changeAddress", this._selectAddress.bind(this));
+
           this.$element.typeahead({
               minLength:3,
               delay:1000,
@@ -59,7 +59,7 @@
               textproperty: function(item) {
                       return item.formatted_address;
                   }, updater: function(item) {
-                      self.$element.trigger('changeAddress',item);
+                      self.$element.trigger('addressChanged',item);
                       return this.textproperty(item);
                   }, matcher: function(item) {
                       return true;
@@ -85,17 +85,22 @@
           google.maps.event.addListener(this.gmarker, 'dragend', $.proxy(this._markerMoved, this));
 
           this.gmarker.setVisible(false);
-          this.$element.on("changeAddress", this._focusAddress.bind(this));
+          this.$element.on("addressChanged", this._focusAddress.bind(this));
         },
-    
+        _getAddressByMarkerPosition: function(markerPos, callback) {
+            var self = this;
+            this.geocoder.geocode({latLng: markerPos}, function( results, status) {
+             if(status == google.maps.GeocoderStatus.OK) {
+                 var pickedAddress = results[0];
+                 self.$element.trigger("addressChanged", pickedAddress);
+                callback(pickedAddress);
+             }
+            });
+        },
         _markerMoved: function() {
           var markerPos= this.gmarker.getPosition();
-          this.geocoder.geocode({latLng: markerPos}, function( results, status) {
-             if(status == google.maps.GeocoderStatus.OK) {
-                 console.dir(results);
-             }
-          });
-          this._selectAddress(null, markerPos);
+          markerPos.getAddress = this._getAddressByMarkerPosition.bind(this, markerPos);
+          this.$element.trigger("positionChanged",markerPos);
         },
 
         // Autocomplete source method: fill its suggests with google geocoder results
@@ -109,7 +114,6 @@
                     for (var i = 0; i < results.length; i++) {
                         suggestions.push(results[i]);
                     };
-                    console.log(status);
                 }
                 process(suggestions);
             })
@@ -166,14 +170,13 @@
         draggableMarker: true,
         regionBias: null,
         map: false,
-        typeaheaddelay: 1000,
+        typeaheaddelay: 300,
         mapOptions: {
             zoom: 5,
-            center: new google.maps.LatLng(46, 2),
+            center: new google.maps.LatLng(52.5122, 13.4194),
             scrollwheel: false,
             mapTypeId: google.maps.MapTypeId.ROADMAP
-        },
-        onUpdate: function() {}
+        }
 
     };
 
