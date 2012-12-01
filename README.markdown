@@ -4,6 +4,11 @@ jquery-addresspicker for Bootstrap
 I forked this project from sgruhier[https://github.com/sgruhier/jquery-addresspicker] who has built a simple address picker on top of JQuery UI Autocomplete.
 Since I don't want the overhead of JQUI and am stuck with Bootstrap I chose to rewrite his plugin.
 
+Demo
+----
+Seeing is believing. [Hosted on AWS S3](http://mngscl-10.s3-website-us-east-1.amazonaws.com/jquery-addresspicker-bootstrap/demos/index.html), if it's broken and you need it, drop me a line. 
+Otherwise: just clone the repo and open demos/index.html on your local machine...
+
 Simple Addresspicker
 --------------------
 The addresspicker is a plain JQuery plugin and follows mostly concepts known to Bootstrap users. I'm using Bootstrap typeahead filled by anonymous google map geocoder suggestions.
