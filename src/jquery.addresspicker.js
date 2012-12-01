@@ -57,13 +57,14 @@
               delay:1000,
               source: this._geocode.bind(this),
               textproperty: function(item) {
-                  return item.formatted_address;
-              }, updater: function(item) {
-                  self.$element.trigger('changeAddress',item);
-                  return this.textproperty(item);
-              }, matcher: function(item) {
-                  return true;
-              }
+                      return item.formatted_address;
+                  }, updater: function(item) {
+                      self.$element.trigger('changeAddress',item);
+                      return this.textproperty(item);
+                  }, matcher: function(item) {
+                      return true;
+                  }
+
           });
 
             if (this.options.map) {
@@ -136,8 +137,13 @@
           }
 
         },
-        _selectAddress: function(evt, gMapsLocation) {
+        _addressSelected: function(evt, gMapsLocation) {
+            console.dir(gMapsLocation);
+
             this.selectedResult = gMapsLocation;
+        },
+        _locationSelected: function(evt, LatLng) {
+
         }
 
       };
@@ -166,7 +172,8 @@
             center: new google.maps.LatLng(46, 2),
             scrollwheel: false,
             mapTypeId: google.maps.MapTypeId.ROADMAP
-        }
+        },
+        onUpdate: function() {}
 
     };
 
