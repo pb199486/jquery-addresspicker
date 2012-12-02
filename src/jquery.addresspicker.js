@@ -5,7 +5,12 @@
  * Dual licensed under the MIT or GPL Version 2 licenses.
  * http://jquery.org/license
  *
-
+ * http://docs.jquery.com/UI/Progressbar
+ *
+ * Depends:
+ *   jquery.ui.core.js
+ *   jquery.ui.widget.js
+ *   jquery.ui.autocomplete.js
  */
 (function( $, google ) {
 
@@ -33,9 +38,9 @@
         },
     
         reloadPosition: function() {
-          this.gmarker.setVisible(true);
-          this.gmarker.setPosition(new google.maps.LatLng(this.lat.val(), this.lng.val()));
-          this.gmap.setCenter(this.gmarker.getPosition());
+            this.gmap.setCenter(this.gmarker.getPosition());
+            this.gmarker.setVisible(true);
+            google.maps.event.trigger(this.gmap, 'resize');
         },
     
         selected: function() {
@@ -46,7 +51,6 @@
           this.geocoder = new google.maps.Geocoder();
 
           var self = this;
-
           this.$element.typeahead({
               minLength:3,
               delay:this.options.typeaheaddelay,
