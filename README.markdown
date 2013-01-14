@@ -71,6 +71,16 @@ Open
 ----
 What I actually wanted to create is a popover like the incredible [Bootstrap Datepicker](http://www.eyecon.ro/bootstrap-datepicker/). The state I've reached is sufficient for me but if you want, go ahead and fork me.
 
+Closed (FAQ)
+------------
+Q: When the Addresspicker is loaded inside an invisible container the map view is broken / displays strangely after the container is shown.
+
+A: After unhiding a Google map container you have to trigger a *resize event* to force the map to redraw (see: http://stackoverflow.com/questions/4340975/google-maps-loading-strangely )
+In our case it's sufficient to call the `reloadPosition` function on the plugin:
+
+`$addressPicker.addresspicker('reloadPosition')`
+
+
 Credits
 -------
 - Stefan Adolf - @stadolf[http://twitter.com/stadolf]
