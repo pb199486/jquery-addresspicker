@@ -34,7 +34,7 @@
 
         updatePosition: function() {
           this.gmarker.setVisible(true);
-          this._updatePosition(this.gmarker.getPosition());
+          this.reloadPosition();
         },
     
         reloadPosition: function() {
