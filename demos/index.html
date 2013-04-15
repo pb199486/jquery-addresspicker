@@ -27,6 +27,7 @@
 		});
 
         addresspickerMap.on("addressChanged", function(evt, address) {
+           alert(address.geometry.location.lat() +"," + address.geometry.location.lng())
            console.dir(address);
         });
         addresspickerMap.on("positionChanged", function(evt, markerPosition) {
@@ -101,7 +102,9 @@
         });
 
         addresspickerMap.on("addressChanged", function(evt, address) {
+
            console.dir(address); //do something with the address. It's a Google Geocoder result
+           console.dir(address.geometry.location.lat() +"," + address.geometry.location.lng());
         });
 
         //markerPosition is a LatLng that I augmented with an getAddress function for convenience
