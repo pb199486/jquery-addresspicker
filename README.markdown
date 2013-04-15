@@ -35,6 +35,7 @@ Note that I'm using JQuery events to notify you on address and marker position c
         });
 
         addresspickerMap.on("addressChanged", function(evt, address) {
+           alert(address.geometry.location.lat() +"," + address.geometry.location.lng());
            console.dir(address); //do something with the address. It's a Google Geocoder result
         });
 
