@@ -33,13 +33,13 @@
         },
 
         updatePosition: function() {
-          this.gmarker.setVisible(true);
+          this.gmarker.setVisible(this.options.marker.visible);
           this.reloadPosition();
         },
     
         reloadPosition: function() {
             this.gmap.setCenter(this.gmarker.getPosition());
-            this.gmarker.setVisible(true);
+            this.gmarker.setVisible(this.options.marker.visible);
             google.maps.event.trigger(this.gmap, 'resize');
         },
     
@@ -83,7 +83,7 @@
 
           google.maps.event.addListener(this.gmarker, 'dragend', $.proxy(this._markerMoved, this));
 
-          this.gmarker.setVisible(false);
+          this.gmarker.setVisible(this.options.marker.visible);
           this.$element.on("addressChanged", this._focusAddress.bind(this));
         },
         _getAddressByMarkerPosition: function(markerPos, callback) {
@@ -135,7 +135,7 @@
 
           if (this.gmarker) {
             this.gmarker.setPosition(gMapsLocation.geometry.location);
-            this.gmarker.setVisible(true);
+            this.gmarker.setVisible(this.options.marker.visible);
             this.gmap.fitBounds(gMapsLocation.geometry.viewport);
           }
 
@@ -175,8 +175,10 @@
             center: new google.maps.LatLng(52.5122, 13.4194),
             scrollwheel: false,
             mapTypeId: google.maps.MapTypeId.ROADMAP
+        },
+        marker:{
+            visible:true
         }
-
     };
 
     $.fn.addresspicker.Constructor = AddressPicker;
